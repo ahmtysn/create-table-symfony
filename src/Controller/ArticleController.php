@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,6 +23,23 @@ class ArticleController extends AbstractController
     $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
     return $this->render('articles/index.html.twig', [
       'articles' => $articles
+    ]);
+  }
+
+  /**
+   * @Route("/article/new",name="new_article")
+   */
+  public function new(Request $request)
+  {
+    $article = new Article();
+    $form = $this->createFormBuilder($article)
+      ->add('title', TextType::class,  ['attr' => ['class' => 'form-control']])
+      ->add('body', TextareaType::class,  ['required' => false, 'attr' => ['class' => 'form-control']])
+      ->add('save', SubmitType::class,  ['label' => 'create', 'attr' => ['class' => 'btn btn-primary mt-3']])
+      ->getForm();
+
+    return $this->render('articles/new.html.twig', [
+      'form' => $form->createView()
     ]);
   }
 

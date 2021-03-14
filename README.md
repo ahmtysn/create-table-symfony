@@ -1,4 +1,4 @@
-# SymphArt
+# Symfony 5 - Test App
 
 > A basic Symfony CRUD application used in the tutorial series "Up & Running With Symfony"
 

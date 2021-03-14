@@ -9,15 +9,18 @@
 			<thead>
 				<tr>
 					<th>Article Title</th>
+					<th>Article Body</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for article in articles %}
 					<tr>
-						<td>{{article}}</td>
+						<td>{{article.title}}</td>
+						<td>{{article.body}}</td>
 						<td>
-							<a href="/article/1" class="btn btn-dark">Show</a>
+							<a href="index.php/article/{{article.id}}" class="btn btn-dark">Show</a>
+							{# tuts/symfony-test/public/index.php/article/1 #}
 						</td>
 					</tr>
 				{% endfor %}
